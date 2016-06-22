@@ -1,0 +1,21 @@
+.mod-select {
+  float: left;
+  width: 120px;
+  margin-right: 10px;
+  h6 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+  }
+  ul {
+    li {
+      cursor: pointer;
+      margin: 4px;
+      background-color: gainsboro;
+      padding: 6px;
+      &.active {
+        background-color: #40a070;
+        color: #fff;
+      }
+    }
+  }
+}
