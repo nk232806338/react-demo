@@ -2,6 +2,8 @@ var path = require("path");
 var webpack = require('webpack');
 module.exports = {
   entry: {
+    demo: './test/main-test.js',
+    demo_vendor: ['./test/utils/jquery.js'],
     main: './main.jsx',
     vendor: ['react', 'react-dom', 'underscore', 'moment'],
   },
@@ -40,7 +42,14 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
       filename:"vendor.js",
+      chunks: ['main'],
       minChunks: Infinity
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: "demo_vendor",
+      filename:"demo_vendor.js",
+      chunks: ['demo'],
+      minChunks: 100
     }),
   ]
 };
