@@ -3,11 +3,12 @@ var webpack = require('webpack');
 module.exports = {
   entry: {
     main: './main.jsx',
-    vendor: ['react'],
+    vendor: ['react', 'react-dom', 'underscore', 'moment'],
   },
   output: {
     path: path.join(__dirname, "built"),
     filename: "[name].js",
+    publicPath: 'http://120.25.152.191:8080/',
   },
   resolve: {
     modulesDirectories: [ 'node_modules' ],
@@ -27,6 +28,11 @@ module.exports = {
       {
         test: /\.scss$/,
         loaders: ["style", "css", "sass"]
+      },
+      {
+        test: /\.png$/,
+        loader: "url-loader?limit=3000&name=img/[name].[ext]",
+        query: 'random=' + new Date().getTime(),
       }
     ],
   },
