@@ -31,7 +31,7 @@ module.exports = {
       },
       {
         test: /\.png$/,
-        loader: "url-loader?limit=3000&name=img/[name].[ext]",
+        loader: "url-loader?limit=5000&name=img/[name].[ext]",
         query: 'random=' + new Date().getTime(),
       }
     ],
