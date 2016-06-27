@@ -11,10 +11,12 @@
   "author": "nike",
   "license": "ISC",
   "dependencies": {
+    "classnames": "^2.2.5",
     "install": "^0.8.1",
     "moment": "^2.13.0",
     "moment-range": "^2.2.0",
     "npm": "^3.9.6",
+    "qwest": "^4.4.4",
     "react": "^0.14.8",
     "react-dom": "^0.14.8",
     "underscore": "^1.8.3"

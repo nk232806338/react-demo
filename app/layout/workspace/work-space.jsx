@@ -1,5 +1,6 @@
 var React = require('react');
 var Select = require('./../../component/select.jsx');
+var Dialog = require('../../component/dialog/dialog');
 var _ = require('underscore');
 require('./work-space.scss');
 var data_level_0 = [
@@ -28,10 +29,53 @@ var data_level_2 = [
   {name: '联想', id: 1123, parentId: 112},
 ];
 
+
+var UserSelect = React.createClass({
+  getInitialState() {
+    return {
+      loadStatus: 'loading'
+    };
+  },
+  handleSubmit(event) {
+    this.props.handleSubmit({
+      userName: this.refs.userName.value,
+      userAge: this.refs.userAge.value,
+    });
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+  },
+  componentDidMount() {
+    if (this.refs.userName) this.refs.userName.focus();
+    window.setTimeout(() => {
+      this.setState({
+        loadStatus: 'load-success'
+      });
+    }, 2000);
+  },
+  render() {
+    var { loadStatus } = this.state;
+    return (<div>
+      {loadStatus === 'loading' ? <div><img src="/imgs/loading.gif"/></div> :
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="" style={{display: 'block'}}>
+            user-name:<input type="text" ref="userName"/>
+          </label>
+          <label htmlFor="">
+            user-age:<input type="text" ref="userAge"/>
+          </label>
+          <input type="submit">提交</input>
+        </form>}
+
+    </div>);
+  }
+});
+
 var WorkSpace = React.createClass({
   displayName: 'app',
   getInitialState() {
     return {
+      show: false,
       data_level_0: data_level_0,
       data_level_1: [],
       data_level_2: [],
@@ -56,9 +100,29 @@ var WorkSpace = React.createClass({
   handleThirdLevelClick(id) {
 
   },
+  showDialog() {
+    this.setState({
+      show: true
+    });
+  },
+  hideDialog() {
+    this.setState({
+      show: false
+    });
+  },
+  handleSubmit(req) {
+    alert(JSON.stringify(req));
+    this.setState({
+      show: false
+    });
+  },
   render() {
-    var {data_level_0, data_level_1, data_level_2} = this.state;
+    var {data_level_0, data_level_1, data_level_2, show} = this.state;
     return (<div className="work-space">
+      <a href="javascript:void(0);" onClick={this.showDialog}>show dialog</a>
+      {show ? <Dialog onClose={this.hideDialog}>
+        <UserSelect handleSubmit={this.handleSubmit}/>
+      </Dialog> : null}
       <Select data={data_level_0} title="一级分类" onSelect={this.handleFirstLevelClick}/>
       <Select data={data_level_1} title="二级分类" onSelect={this.handleSecondLevelClick}/>
       <Select data={data_level_2} title="三级分类" onSelect={this.handleThirdLevelClick}/>

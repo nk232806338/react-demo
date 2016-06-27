@@ -6,16 +6,17 @@
   bottom: 0;
   background-color: #000000;
   opacity: .8;
-  z-index: 99;
+  z-index: 9;
 }
 .dialog-mod {
   width: 400px;
   height: 300px;
+  position: relative;
   background-color: #61c7f7;
   position: absolute;
   left: 50%;
   margin-left: -200px;
-  z-index: 100;
+  z-index: 10;
   border: 4px solid white;
 }
 
@@ -26,4 +27,17 @@
     background: url("input_checked_outline_189px_1158646_easyicon.net.png") no-repeat;
     background-size: 100%;
   }
+}
+.close {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #fff;
+  background-color: #40a070;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+  z-index: 11;
 }

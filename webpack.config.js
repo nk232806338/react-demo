@@ -16,7 +16,7 @@ module.exports = {
     modulesDirectories: [ 'node_modules' ],
     extensions: ['', '.js', '.jsx']
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'eval',
   module: {
     loaders: [
       {
@@ -39,6 +39,12 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NODE_ENV': JSON.stringify('production'), //production & development,
+        'PUBLIC_PATH': 'http://127.0.0.1'
+      }
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
       filename:"vendor.js",
